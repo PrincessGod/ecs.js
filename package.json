@@ -1,0 +1,42 @@
+{
+  "name": "ecs.js",
+  "version": "1.0.0",
+  "description": "entity commponent system in javascript",
+  "main": "index.js",
+  "scripts": {
+    "dev": "rollup -cw",
+    "lint": "eslint src",
+    "build": "rollup -c",
+    "build-min": "rollup -c && uglifyjs build/ecs.js -cm > build/ecs.min.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PrincessGod/ecs.js.git"
+  },
+  "keywords": [
+    "ecs",
+    "js"
+  ],
+  "author": "PrincessGod",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PrincessGod/ecs.js/issues"
+  },
+  "homepage": "https://github.com/PrincessGod/ecs.js#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-es2015-rollup": "^3.0.0",
+    "eslint": "^5.2.0",
+    "eslint-config-mdcs": "^4.2.3",
+    "rollup": "^0.63.4",
+    "rollup-plugin-babel": "^3.0.7",
+    "uglify-js": "^3.4.6"
+  },
+  "babel": {
+    "presets": ["es2015-rollup"]
+  },
+  "eslintConfig": {
+    "extends": "mdcs"
+  }
+}
