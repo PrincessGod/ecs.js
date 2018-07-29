@@ -77,8 +77,9 @@ export class Component {
 
 			}
 
-		} else
-			return console.error( `unknown component info: ${com}` );
+		}
+
+		return console.error( `unknown component info: ${com}` );
 
 	}
 

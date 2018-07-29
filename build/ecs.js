@@ -147,32 +147,13 @@
   					_obj._uuid = UUID.create();
   					return _obj;
   				}
-  			} else return console.error('unknown component info: ' + com);
+  			}
+
+  			return console.error('unknown component info: ' + com);
   		}
   	}]);
   	return Component;
   }();
-
-  for (var i = 0; i < 10; i++) {
-
-  	console.log(UUID.create());
-  }
-
-  function test1() {
-  	for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-  		args[_key] = arguments[_key];
-  	}
-
-  	console.log(args);
-  	this.args = args;
-  }
-  function test2() {}
-
-  Component.inject(test1);
-  Component.inject(test2);
-  Component.inject(test2);
-  window.com = Component.create(test1, 1, 2, 'test');
-  console.log(com);
 
   exports.UUID = UUID;
   exports.Component = Component;
