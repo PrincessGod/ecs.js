@@ -1,8 +1,11 @@
 {
-  "name": "ecs.js",
-  "version": "1.0.0",
+  "name": "czpg-ecs",
+  "version": "1.0.1",
   "description": "entity commponent system in javascript",
-  "main": "index.js",
+  "main": "build/ecs.js",
+  "files": [
+    "./build"
+  ],
   "scripts": {
     "dev": "rollup -cw",
     "lint": "eslint src",
@@ -18,7 +21,7 @@
     "ecs",
     "js"
   ],
-  "author": "PrincessGod",
+  "author": "princessgod",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/PrincessGod/ecs.js/issues"

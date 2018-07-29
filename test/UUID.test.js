@@ -2,7 +2,7 @@
 /* eslint padded-blocks: 0 */
 
 var assert = require( 'assert' );
-var ecs = require( '../build/ecs.js' );
+var ecs = require( '../' );
 
 describe( 'UUID', () => {
 	describe( '#create()', () => {
