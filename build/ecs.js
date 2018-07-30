@@ -155,8 +155,80 @@
   	return Component;
   }();
 
+  var Entity = function () {
+  	function Entity() {
+  		classCallCheck(this, Entity);
+
+
+  		this._uuid = UUID.create();
+  		this._com = {};
+  	}
+
+  	createClass(Entity, [{
+  		key: 'addComponent',
+  		value: function addComponent(com) {
+
+  			var componentName = void 0;
+  			if (typeof com === 'number') componentName = Component.getInjectedComponents().get(com).name;else if (typeof com === 'function') componentName = com.name;else if (com.componentKey) {
+
+  				componentName = com.constructor.name;
+  				this._com[componentName] = com;
+  				return this._com[componentName];
+  			} else return console.error('wrong argument type');
+
+  			if (this._com[componentName]) console.warn('componnet type ' + componentName + ' existed');else {
+  				for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+  					args[_key - 1] = arguments[_key];
+  				}
+
+  				var component = Component.create.apply(Component, [com].concat(args));
+  				this._com[componentName] = component;
+  			}
+  			return this._com[componentName];
+  		}
+  	}, {
+  		key: 'removeComponent',
+  		value: function removeComponent(com) {
+
+  			var componentName = void 0;
+  			if (typeof com === 'number') componentName = Component.getInjectedComponents().get(com).name;else if (typeof com === 'function') componentName = com.name;else if (com.componentKey) componentName = com.constructor.name;else return console.error('argument type error');
+
+  			var component = this._com[componentName];
+  			delete this._com[componentName];
+  			return component;
+  		}
+  	}, {
+  		key: 'getComponent',
+  		value: function getComponent(com) {
+
+  			var componentName = void 0;
+  			if (typeof com === 'number') componentName = Component.getInjectedComponents().get(com).name;else if (typeof com === 'function') componentName = com.name;else if (com.componentKey) {
+
+  				componentName = com.constructor.name;
+  				return this._com[componentName];
+  			} else return console.error('argument type error');
+
+  			return this._com[componentName];
+  		}
+  	}, {
+  		key: 'uuid',
+  		get: function get$$1() {
+
+  			return this._uuid;
+  		}
+  	}, {
+  		key: 'com',
+  		get: function get$$1() {
+
+  			return this._com;
+  		}
+  	}]);
+  	return Entity;
+  }();
+
   exports.UUID = UUID;
   exports.Component = Component;
+  exports.Entity = Entity;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 
