@@ -11,7 +11,7 @@
 ecs.js
 <script>
 
-const { UUID, Component, Entity } = ECS;
+const { UUID, Component, Entity, Context } = ECS;
 
 function test1(  ) {
 
@@ -26,6 +26,9 @@ var entity2 = new Entity();
 var component1 = entity1.addComponent( componentId1 );
 var component2 = entity1.addComponent( test1 );
 var component3 = entity2.addComponent( componentId1 );
+
+var context = new Context();
+context.addEntity(entity1);
 
 </script>
 </body>

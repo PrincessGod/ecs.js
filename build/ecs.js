@@ -226,9 +226,52 @@
   	return Entity;
   }();
 
+  var Context = function () {
+  	function Context() {
+  		classCallCheck(this, Context);
+
+
+  		this._entitys = [];
+  	}
+
+  	createClass(Context, [{
+  		key: "addEntity",
+  		value: function addEntity(e) {
+
+  			if (this._entitys.indexOf(e) < 0) this._entitys.push(e);else console.warn("entity " + e + " already existed");
+
+  			return this;
+  		}
+  	}, {
+  		key: "removeEntity",
+  		value: function removeEntity(e) {
+
+  			var idx = this._entitys.indexOf(e);
+
+  			if (idx > -1) this._entitys.splice(idx, 1);
+
+  			return this;
+  		}
+  	}, {
+  		key: "entitys",
+  		get: function get$$1() {
+
+  			return this._entitys;
+  		}
+  	}, {
+  		key: "count",
+  		get: function get$$1() {
+
+  			return this._entitys.length;
+  		}
+  	}]);
+  	return Context;
+  }();
+
   exports.UUID = UUID;
   exports.Component = Component;
   exports.Entity = Entity;
+  exports.Context = Context;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 
