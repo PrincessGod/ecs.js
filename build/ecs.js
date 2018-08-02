@@ -268,10 +268,77 @@
   	return Context;
   }();
 
+  var Group = function () {
+  	function Group() {
+  		var searchString = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  		classCallCheck(this, Group);
+
+
+  		if (!!this._searchString) throw Error('searchString not passed');
+
+  		this._searchString = searchString.replace(/\s/g, '').split('&').sort().join('&');
+  		var coms = this._searchString.split('&');
+  		this._requiredComs = coms.filter(function (c) {
+  			return c[0] !== '!';
+  		});
+  		this._disabledComs = coms.filter(function (c) {
+  			return c[0] === '!';
+  		}).map(function (c) {
+  			return c.slice(1);
+  		});
+  		this._entities = [];
+  	}
+
+  	createClass(Group, [{
+  		key: 'addEntity',
+  		value: function addEntity(e) {
+
+  			if (this.test(e) && this._entities.indexOf(e) < 0) {
+
+  				this._entities.push(e);
+  				return true;
+  			}
+  			return false;
+  		}
+  	}, {
+  		key: 'removeEntity',
+  		value: function removeEntity(e) {
+
+  			var idx = this._entities.indexOf(e);
+  			if (idx > -1) return this._entities.splice(idx, 1)[0];
+  			return false;
+  		}
+  	}, {
+  		key: 'test',
+  		value: function test(e) {
+
+  			return !this._requiredComs.filter(function (com) {
+  				return !e.com[com];
+  			}).length && !this._disabledComs.filter(function (com) {
+  				return e.com[com];
+  			}).length;
+  		}
+  	}, {
+  		key: 'searchString',
+  		get: function get$$1() {
+
+  			return this._searchString;
+  		}
+  	}, {
+  		key: 'entities',
+  		get: function get$$1() {
+
+  			return this._entities;
+  		}
+  	}]);
+  	return Group;
+  }();
+
   exports.UUID = UUID;
   exports.Component = Component;
   exports.Entity = Entity;
   exports.Context = Context;
+  exports.Group = Group;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 
