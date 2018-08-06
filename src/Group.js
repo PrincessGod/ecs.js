@@ -2,14 +2,23 @@ export class Group {
 
 	constructor( searchString = '' ) {
 
-		if ( !! this._searchString )
+		if ( ! searchString )
 			throw Error( `searchString not passed` );
 
-		this._searchString = searchString.replace( /\s/g, '' ).split( '&' ).sort().join( '&' );
+		this._searchString = Group.getSearchString( searchString );
 		const coms = this._searchString.split( '&' );
 		this._requiredComs = coms.filter( ( c ) => c[ 0 ] !== '!' );
 		this._disabledComs = coms.filter( ( c ) => c[ 0 ] === '!' ).map( ( c ) => c.slice( 1 ) );
 		this._entities = [];
+
+	}
+
+	static getSearchString( searchString ) {
+
+		if ( typeof searchString !== 'string' || ! searchString )
+			return console.error( `unvalued search string ${searchString}` );
+
+		return searchString.replace( /\s/g, '' ).split( '&' ).sort().join( '&' );
 
 	}
 

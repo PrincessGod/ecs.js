@@ -96,4 +96,27 @@ describe( 'Context', () => {
 		} );
 	} );
 
+	describe( '#getSearchString()', () => {
+		var key1 = Group.getSearchString( 'test1&test2' );
+		var key2 = Group.getSearchString( ' test 1 & te st2' );
+		var key3 = Group.getSearchString( 'test2&test1' );
+		var key4 = Group.getSearchString( '!test2&test1' );
+		var key5 = Group.getSearchString( 'test1&!test2' );
+		it( 'should return origin string', function () {
+			assert.ok( key1 === 'test1&test2' );
+		} );
+		it( 'should reture same key ignore spaces', function () {
+			assert.ok( key1 === key2 );
+		} );
+		it( 'should reture same key ignore order', function () {
+			assert.ok( key1 === key3 );
+		} );
+		it( 'should reture different key because of negative', function () {
+			assert.ok( key1 !== key4 );
+		} );
+		it( 'should reture same key even have negative', function () {
+			assert.ok( key5 === key4 );
+		} );
+	} );
+
 } );
