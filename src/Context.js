@@ -1,4 +1,5 @@
 import { Group } from './Group';
+import { System } from './System';
 
 export class Context {
 
@@ -6,6 +7,7 @@ export class Context {
 
 		this._entitys = [];
 		this._groups = new Map();
+		this._systems = [];
 
 	}
 
@@ -15,9 +17,15 @@ export class Context {
 
 	}
 
-	get count() {
+	get entityCount() {
 
 		return this._entitys.length;
+
+	}
+
+	get systems() {
+
+		return this._systems;
 
 	}
 
@@ -60,6 +68,39 @@ export class Context {
 		this._entitys.forEach( e => group.addEntity( e ) );
 		this._groups.set( key, group );
 		return group;
+
+	}
+
+	addSystem( s ) {
+
+		if ( s instanceof System ) {
+
+			this._systems.push( s );
+			this._systems.sort( ( a, b ) => a.priority - b.priority );
+
+		}
+
+		return this;
+
+	}
+
+	removeSystem( s ) {
+
+		while ( this._systems.indexOf( s ) > - 1 ) {
+
+			const idx = this._systems.indexOf( s );
+			this._systems.splice( idx, 1 );
+
+		}
+
+		return this;
+
+	}
+
+	execute() {
+
+		this._systems.forEach( ( s ) => s.enable && s.update( this ) );
+		return this;
 
 	}
 

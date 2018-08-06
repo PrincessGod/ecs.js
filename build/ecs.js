@@ -300,6 +300,38 @@
   	return Group;
   }();
 
+  var System = function () {
+  	function System() {
+  		var priority = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+  		var enable = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  		classCallCheck(this, System);
+
+
+  		this._priority = priority;
+  		this._enable = enable;
+  	}
+
+  	createClass(System, [{
+  		key: "update",
+  		value: function update(context) {// eslint-disable-line
+
+  		}
+  	}, {
+  		key: "priority",
+  		get: function get$$1() {
+
+  			return this._priority;
+  		}
+  	}, {
+  		key: "enable",
+  		get: function get$$1() {
+
+  			return this._enable;
+  		}
+  	}]);
+  	return System;
+  }();
+
   var Context = function () {
   	function Context() {
   		classCallCheck(this, Context);
@@ -307,6 +339,7 @@
 
   		this._entitys = [];
   		this._groups = new Map();
+  		this._systems = [];
   	}
 
   	createClass(Context, [{
@@ -354,16 +387,58 @@
   			return group;
   		}
   	}, {
+  		key: 'addSystem',
+  		value: function addSystem(s) {
+
+  			if (s instanceof System) {
+
+  				this._systems.push(s);
+  				this._systems.sort(function (a, b) {
+  					return a.priority - b.priority;
+  				});
+  			}
+
+  			return this;
+  		}
+  	}, {
+  		key: 'removeSystem',
+  		value: function removeSystem(s) {
+
+  			while (this._systems.indexOf(s) > -1) {
+
+  				var idx = this._systems.indexOf(s);
+  				this._systems.splice(idx, 1);
+  			}
+
+  			return this;
+  		}
+  	}, {
+  		key: 'execute',
+  		value: function execute() {
+  			var _this = this;
+
+  			this._systems.forEach(function (s) {
+  				return s.enable && s.update(_this);
+  			});
+  			return this;
+  		}
+  	}, {
   		key: 'entitys',
   		get: function get$$1() {
 
   			return this._entitys;
   		}
   	}, {
-  		key: 'count',
+  		key: 'entityCount',
   		get: function get$$1() {
 
   			return this._entitys.length;
+  		}
+  	}, {
+  		key: 'systems',
+  		get: function get$$1() {
+
+  			return this._systems;
   		}
   	}]);
   	return Context;
@@ -374,6 +449,7 @@
   exports.Entity = Entity;
   exports.Context = Context;
   exports.Group = Group;
+  exports.System = System;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 
