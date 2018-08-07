@@ -1,10 +1,13 @@
 {
   "name": "czpg-ecs",
-  "version": "1.0.3",
+  "version": "1.0.7",
   "description": "entity commponent system in javascript",
   "main": "build/ecs.js",
+  "module": "build/ecs.cjs.js",
   "files": [
-    "./build"
+    "build/ecs.js",
+    "build/ecs.cjs.js",
+    "build/ecs.min.js"
   ],
   "scripts": {
     "dev": "rollup -cw",
