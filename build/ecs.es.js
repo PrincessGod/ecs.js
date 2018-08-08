@@ -1,7 +1,3 @@
-'use strict';
-
-Object.defineProperty(exports, '__esModule', { value: true });
-
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -442,10 +438,5 @@ var Context = function () {
 	return Context;
 }();
 
-exports.UUID = UUID;
-exports.Component = Component;
-exports.Entity = Entity;
-exports.Context = Context;
-exports.Group = Group;
-exports.System = System;
-//# sourceMappingURL=ecs.cjs.js.map
+export { UUID, Component, Entity, Context, Group, System };
+//# sourceMappingURL=ecs.es.js.map

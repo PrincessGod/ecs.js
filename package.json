@@ -1,19 +1,21 @@
 {
   "name": "czpg-ecs",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "entity commponent system in javascript",
   "main": "build/ecs.js",
-  "module": "build/ecs.cjs.js",
+  "module": "build/ecs.es.js",
+  "browser": "build/ecs.umd.js",
   "files": [
     "build/ecs.js",
-    "build/ecs.cjs.js",
+    "build/ecs.es.js",
+    "build/ecs.umd.js",
     "build/ecs.min.js"
   ],
   "scripts": {
     "dev": "rollup -cw",
     "lint": "eslint src",
     "build": "rollup -c",
-    "build-min": "rollup -c && uglifyjs build/ecs.js -cm > build/ecs.min.js",
+    "build-min": "rollup -c && uglifyjs build/ecs.umd.js -cm > build/ecs.min.js",
     "test": "mocha test"
   },
   "repository": {

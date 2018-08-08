@@ -1,4 +1,5 @@
 import babel from 'rollup-plugin-babel';
+import pkg from './package.json';
 
 export default {
 
@@ -6,14 +7,17 @@ export default {
 	plugins: [ babel() ],
 	output: [ {
 		name: 'ECS',
-		file: 'build/ecs.js',
+		file: pkg.browser,
 		sourcemap: true,
 		format: 'umd'
 	}, {
-		file: 'build/ecs.cjs.js',
+		file: pkg.main,
 		sourcemap: true,
 		format: 'cjs'
-	}
-	]
+	}, {
+		file: pkg.module,
+		sourcemap: true,
+		format: 'es'
+	} ]
 
 };
