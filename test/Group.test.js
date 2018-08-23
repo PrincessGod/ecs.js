@@ -3,13 +3,17 @@
 
 var assert = require( 'assert' );
 var ecs = require( '../' );
+var Component = ecs.Component;
 var Entity = ecs.Entity;
 var Group = ecs.Group;
 
-describe( 'Context', () => {
+describe( 'Group', () => {
 
 	function com1() {}
 	function com2() {}
+
+	Component.inject( com1 );
+	Component.inject( com2 );
 
 	var entity1 = new Entity();
 	var entity2 = new Entity();

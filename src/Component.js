@@ -35,6 +35,18 @@ export class Component {
 
 		}
 
+		Object.defineProperties( fun, {
+
+			componentKey: {
+				get() {
+
+					return key;
+
+				}
+			}
+
+		} );
+
 		Object.defineProperties( fun.prototype, {
 			uuid: {
 				get() {
@@ -59,27 +71,21 @@ export class Component {
 
 	static create( com, ...args ) {
 
-		if ( typeof com === 'function' ) {
+		const components = Component.getInjectedComponents();
+		let Func = null;
 
-			const obj = new com( ...args );
-			obj._uuid = UUID.create();
-			return obj;
+		if ( typeof com === 'function' &&
+			typeof com.componentKey === 'number' &&
+			components.get( com.componentKey ) === com )
+			Func = com;
+		else if ( typeof com === 'number' && components.has( com ) )
+			Func = components.get( com );
+		else
+			return console.error( `unknown component info: ${com}` );
 
-		} else if ( typeof com === 'number' ) {
-
-			const components = Component.getInjectedComponents();
-			if ( components.has( com ) ) {
-
-				const fun = components.get( com );
-				const obj = new fun( ...args );
-				obj._uuid = UUID.create();
-				return obj;
-
-			}
-
-		}
-
-		return console.error( `unknown component info: ${com}` );
+		const obj = new Func( ...args );
+		obj._uuid = UUID.create();
+		return obj;
 
 	}
 

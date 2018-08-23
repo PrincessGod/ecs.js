@@ -107,6 +107,17 @@
   				return key;
   			}
 
+  			Object.defineProperties(fun, {
+
+  				componentKey: {
+  					get: function get$$1() {
+
+  						return key;
+  					}
+  				}
+
+  			});
+
   			Object.defineProperties(fun.prototype, {
   				uuid: {
   					get: function get$$1() {
@@ -128,28 +139,19 @@
   	}, {
   		key: 'create',
   		value: function create(com) {
+
+  			var components = Component.getInjectedComponents();
+  			var Func = null;
+
+  			if (typeof com === 'function' && typeof com.componentKey === 'number' && components.get(com.componentKey) === com) Func = com;else if (typeof com === 'number' && components.has(com)) Func = components.get(com);else return console.error('unknown component info: ' + com);
+
   			for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
   				args[_key - 1] = arguments[_key];
   			}
 
-  			if (typeof com === 'function') {
-
-  				var obj = new (Function.prototype.bind.apply(com, [null].concat(args)))();
-  				obj._uuid = UUID.create();
-  				return obj;
-  			} else if (typeof com === 'number') {
-
-  				var components = Component.getInjectedComponents();
-  				if (components.has(com)) {
-
-  					var fun = components.get(com);
-  					var _obj = new (Function.prototype.bind.apply(fun, [null].concat(args)))();
-  					_obj._uuid = UUID.create();
-  					return _obj;
-  				}
-  			}
-
-  			return console.error('unknown component info: ' + com);
+  			var obj = new (Function.prototype.bind.apply(Func, [null].concat(args)))();
+  			obj._uuid = UUID.create();
+  			return obj;
   		}
   	}]);
   	return Component;

@@ -8,6 +8,7 @@ var Component = ecs.Component;
 describe( 'Component', () => {
 	function func1( ...args ) { this.args = args }
 	function func2() {}
+	function func3() {}
 
 	var componentId1 = Component.inject( func1 );
 	var componentId2 = Component.inject( func2 );
@@ -18,11 +19,22 @@ describe( 'Component', () => {
 	var component1 = Component.create( func1, ...args );
 	var component2 = Component.create( componentId1 );
 	var component3 = Component.create( 'unknown' );
+	var component4 = Component.create( func3 );
 	describe( '#getInjectedComponents()', () => {
 		it( 'should return a Map', function () {
 			assert.ok( Component.getInjectedComponents().constructor.name === "Map" );
 		} );
 	} );
+
+	describe( '#componentKey', () => {
+		it( 'should return a number', function () {
+			assert.ok( typeof func1.componentKey === 'number' );
+		} );
+		it( 'should return same number with component', function () {
+			assert.ok( func1.componentKey === component1.componentKey );
+		} );
+	} );
+
 	describe( '#inject()', () => {
 		it( 'should renture number', () => {
 			assert.ok( typeof componentId2 === 'number' );
@@ -49,6 +61,9 @@ describe( 'Component', () => {
 		} );
 		it( 'should return undefined when not have component', () => {
 			assert.ok( component3 === undefined );
+		} );
+		it( 'should return undefined when create uninjected component', () => {
+			assert.ok( component4 === undefined );
 		} );
 	} );
 } );
