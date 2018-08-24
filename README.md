@@ -113,38 +113,26 @@ context.execute();
 
 ## Run in local
 
-clone and move to directory
 ```
+// clone and move to directory
 git clone https://github.com/PrincessGod/ecs.js.git
 cd ecs.js
-```
 
-install npm packages
-```
+// install npm packages
 npm i
-```
 
-build
-```
+// build
 npm run build
-```
 
-build minify version
-```
+// build minify version
 npm run build-min
-```
 
-develop
-```
+// develop
 npm run dev
-```
 
-lint
-```
+// lint
 npm run lint
-```
 
-test
-```
+// test
 npm test
 ```
