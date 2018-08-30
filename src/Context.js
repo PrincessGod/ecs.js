@@ -77,6 +77,7 @@ export class Context {
 
 			this._systems.push( s );
 			this._systems.sort( ( a, b ) => a.priority - b.priority );
+			s.onAddToContext( this );
 
 		}
 
@@ -90,6 +91,7 @@ export class Context {
 
 			const idx = this._systems.indexOf( s );
 			this._systems.splice( idx, 1 );
+			s.onRemoveFromContext( this );
 
 		}
 

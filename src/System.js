@@ -19,6 +19,20 @@ export class System {
 
 	}
 
+	set enable( v ) {
+
+		this._enable = !! v;
+
+	}
+
+	onAddToContext( context ) { // eslint-disable-line
+
+	}
+
+	onRemoveFromContext( context ) { // eslint-disable-line
+
+	}
+
 	update( context ) { // eslint-disable-line
 
 	}

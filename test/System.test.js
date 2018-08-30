@@ -4,9 +4,11 @@
 var assert = require( 'assert' );
 var ecs = require( '../' );
 var System = ecs.System;
+var Context = ecs.Context;
 
 describe( 'System', () => {
 
+	var context = new Context();
 	var system1 = new System();
 	var system2 = new System( 5, false );
 
@@ -28,6 +30,25 @@ describe( 'System', () => {
 	describe( '#update()', () => {
 		it( 'should have update function', function () {
 			assert.ok( typeof system1.update === 'function' );
+		} );
+	} );
+
+	describe( '#onAddToContext()', () => {
+		it( 'should have contex', function () {
+			let o;
+			system1.onAddToContext = ( c ) => { o = c };
+			context.addSystem( system1 );
+			assert.ok( o === context );
+		} );
+	} );
+
+	describe( '#onRemoveFromContext()', () => {
+		it( 'should have contex', function () {
+			let o;
+			system1.onRemoveFromContext = ( c ) => { o = c };
+			context.addSystem( system1 );
+			context.removeSystem( system1 );
+			assert.ok( o === context );
 		} );
 	} );
 

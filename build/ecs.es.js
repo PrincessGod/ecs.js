@@ -308,6 +308,16 @@ var System = function () {
 	}
 
 	createClass(System, [{
+		key: "onAddToContext",
+		value: function onAddToContext(context) {// eslint-disable-line
+
+		}
+	}, {
+		key: "onRemoveFromContext",
+		value: function onRemoveFromContext(context) {// eslint-disable-line
+
+		}
+	}, {
 		key: "update",
 		value: function update(context) {// eslint-disable-line
 
@@ -323,6 +333,10 @@ var System = function () {
 		get: function get$$1() {
 
 			return this._enable;
+		},
+		set: function set$$1(v) {
+
+			this._enable = !!v;
 		}
 	}]);
 	return System;
@@ -392,6 +406,7 @@ var Context = function () {
 				this._systems.sort(function (a, b) {
 					return a.priority - b.priority;
 				});
+				s.onAddToContext(this);
 			}
 
 			return this;
@@ -404,6 +419,7 @@ var Context = function () {
 
 				var idx = this._systems.indexOf(s);
 				this._systems.splice(idx, 1);
+				s.onRemoveFromContext(this);
 			}
 
 			return this;
