@@ -1,14 +1,17 @@
 {
   "name": "czpg-ecs",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "entity commponent system in javascript",
   "main": "build/ecs.js",
   "module": "build/ecs.es.js",
   "browser": "build/ecs.umd.js",
   "files": [
     "build/ecs.js",
+    "build/ecs.js.map",
     "build/ecs.es.js",
+    "build/ecs.es.js.map",
     "build/ecs.umd.js",
+    "build/ecs.umd.js.map",
     "build/ecs.min.js"
   ],
   "scripts": {
