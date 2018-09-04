@@ -172,7 +172,9 @@ var Entity = function () {
 			if (typeof com === 'number') componentName = Component.getInjectedComponents().get(com).name;else if (typeof com === 'function') componentName = com.name;else if (com.componentKey) {
 
 				componentName = com.constructor.name;
-				this._com[componentName] = com;
+
+				if (this._com[componentName]) console.warn('componnet type ' + componentName + ' existed');else this._com[componentName] = com;
+
 				return this._com[componentName];
 			} else return console.error('wrong argument type');
 
