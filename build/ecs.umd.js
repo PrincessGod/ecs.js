@@ -355,7 +355,7 @@
   		classCallCheck(this, Context);
 
 
-  		this._entitys = [];
+  		this._entities = [];
   		this._groups = new Map();
   		this._systems = [];
   	}
@@ -364,9 +364,9 @@
   		key: 'addEntity',
   		value: function addEntity(e) {
 
-  			if (this._entitys.indexOf(e) < 0) {
+  			if (this._entities.indexOf(e) < 0) {
 
-  				this._entitys.push(e);
+  				this._entities.push(e);
   				this._groups.forEach(function (group) {
   					return group.addEntity(e);
   				});
@@ -378,11 +378,11 @@
   		key: 'removeEntity',
   		value: function removeEntity(e) {
 
-  			var idx = this._entitys.indexOf(e);
+  			var idx = this._entities.indexOf(e);
 
   			if (idx > -1) {
 
-  				this._entitys.splice(idx, 1);
+  				this._entities.splice(idx, 1);
   				this._groups.forEach(function (group) {
   					return group.removeEntity(e);
   				});
@@ -398,7 +398,7 @@
   			if (this._groups.has(key)) return this._groups.get(key);
 
   			var group = new Group(key);
-  			this._entitys.forEach(function (e) {
+  			this._entities.forEach(function (e) {
   				return group.addEntity(e);
   			});
   			this._groups.set(key, group);
@@ -443,16 +443,16 @@
   			return this;
   		}
   	}, {
-  		key: 'entitys',
+  		key: 'entities',
   		get: function get$$1() {
 
-  			return this._entitys;
+  			return this._entities;
   		}
   	}, {
   		key: 'entityCount',
   		get: function get$$1() {
 
-  			return this._entitys.length;
+  			return this._entities.length;
   		}
   	}, {
   		key: 'systems',

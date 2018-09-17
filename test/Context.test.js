@@ -55,9 +55,9 @@ describe( 'Context', () => {
 	var system1 = new System1();
 	var system2 = new System2();
 
-	describe( '#entitys', () => {
-		it( 'should have entitys array', function () {
-			assert.ok( typeof context.entitys === 'object' );
+	describe( '#entities', () => {
+		it( 'should have entities array', function () {
+			assert.ok( typeof context.entities === 'object' );
 		} );
 	} );
 

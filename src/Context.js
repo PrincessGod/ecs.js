@@ -5,21 +5,21 @@ export class Context {
 
 	constructor() {
 
-		this._entitys = [];
+		this._entities = [];
 		this._groups = new Map();
 		this._systems = [];
 
 	}
 
-	get entitys() {
+	get entities() {
 
-		return this._entitys;
+		return this._entities;
 
 	}
 
 	get entityCount() {
 
-		return this._entitys.length;
+		return this._entities.length;
 
 	}
 
@@ -31,9 +31,9 @@ export class Context {
 
 	addEntity( e ) {
 
-		if ( this._entitys.indexOf( e ) < 0 ) {
+		if ( this._entities.indexOf( e ) < 0 ) {
 
-			this._entitys.push( e );
+			this._entities.push( e );
 			this._groups.forEach( ( group ) => group.addEntity( e ) );
 
 		} else
@@ -45,11 +45,11 @@ export class Context {
 
 	removeEntity( e ) {
 
-		const idx = this._entitys.indexOf( e );
+		const idx = this._entities.indexOf( e );
 
 		if ( idx > - 1 ) {
 
-			this._entitys.splice( idx, 1 );
+			this._entities.splice( idx, 1 );
 			this._groups.forEach( ( group ) => group.removeEntity( e ) );
 
 		}
@@ -65,7 +65,7 @@ export class Context {
 			return this._groups.get( key );
 
 		const group = new Group( key );
-		this._entitys.forEach( e => group.addEntity( e ) );
+		this._entities.forEach( e => group.addEntity( e ) );
 		this._groups.set( key, group );
 		return group;
 

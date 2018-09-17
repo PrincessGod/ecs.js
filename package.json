@@ -1,6 +1,6 @@
 {
   "name": "czpg-ecs",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "entity commponent system in javascript",
   "main": "build/ecs.js",
   "module": "build/ecs.es.js",
